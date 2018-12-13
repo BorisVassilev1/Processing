@@ -37,19 +37,19 @@ class Player
   {
     if(isKeyPressed[65] == true)
     {
-      this.move(new PVector(-10,0));
+      this.move(new PVector(-5,0));
     }
     if(isKeyPressed[87] == true)
     {
-      this.move(new PVector(0,-10));
+      this.move(new PVector(0,-5));
     }
     if(isKeyPressed[68] == true)
     {
-      this.move(new PVector(10,0));
+      this.move(new PVector(5,0));
     }
     if(isKeyPressed[83] == true)
     {
-      this.move(new PVector(0,10));
+      this.move(new PVector(0,5));
     }
   }
   void draw()
@@ -66,8 +66,8 @@ class Player
     {
       Wall w = walls.get(i);
       if(w.seg.begin.x == w.seg.end.x){  
-        if(((this.pos.x - this.sizeX > w.seg.begin.x && newPos.x - this.sizeX < w.seg.begin.x) ||
-            (this.pos.x + this.sizeX < w.seg.begin.x && newPos.x + this.sizeX > w.seg.begin.x)) && 
+        if(((this.pos.x - this.sizeX >= w.seg.begin.x && newPos.x - this.sizeX <= w.seg.begin.x) ||
+            (this.pos.x + this.sizeX <= w.seg.begin.x && newPos.x + this.sizeX >= w.seg.begin.x)) && 
             ((w.seg.begin.y <= this.pos.y - this.sizeY / 2 && w.seg.end.y >= this.pos.y  ) || 
              (w.seg.begin.y >= this.pos.y && w.seg.end.y <= this.pos.y)))
         {
@@ -77,8 +77,8 @@ class Player
         }
       }
       if(w.seg.begin.y == w.seg.end.y){
-        if(((this.pos.y > w.seg.begin.y && newPos.y < w.seg.begin.y) ||
-            (this.pos.y < w.seg.begin.y && newPos.y > w.seg.begin.y)) && 
+        if(((this.pos.y >= w.seg.begin.y && newPos.y <= w.seg.begin.y) ||
+            (this.pos.y <= w.seg.begin.y && newPos.y >= w.seg.begin.y)) && 
             ((w.seg.begin.x <= this.pos.x && w.seg.end.x >= this.pos.x  ) || 
              (w.seg.begin.x >= this.pos.x && w.seg.end.x <= this.pos.x)))
         {
