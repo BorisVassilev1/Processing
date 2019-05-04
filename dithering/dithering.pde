@@ -1,16 +1,12 @@
-PImage cat;
-int variations = 3;
-
-int index(int x, int y)
-{
-  return x + y * cat.width;
-}
+PImage catin;
+int variations = 1;
 
 void setup()
 {
   size(2000,696);
-  cat = loadImage("cat.jpg");
-  cat.filter(GRAY);
+  catin = loadImage("cat.jpg");
+  catin.filter(GRAY);
+  PImage cat = resize(catin);
   image(cat,0,0,1000,696);
   
   cat.loadPixels();
@@ -18,7 +14,7 @@ void setup()
   {
     for(int x = 1; x < cat.width - 1; x ++)
     {
-      color pix = cat.pixels[index(x,y)];
+      color pix = cat.pixels[index(x,y,cat.width)];
       
       float oldR = red(pix);
       float oldG = green(pix);
@@ -28,13 +24,13 @@ void setup()
       int newG = round(variations * oldG / 255) * (255 / variations);
       int newB = round(variations * oldB / 255) * (255 / variations);
       
-      cat.pixels[index(x,y)] = color(newR,newG,newB);
+      cat.pixels[index(x,y,cat.width)] = color(newR,newG,newB);
       
       float errR = oldR - newR;
       float errG  = oldG - newG;
       float errB = oldB - newB;
       
-      int index  = index(x + 1,y    );
+      int index  = index(x + 1,y    ,cat.width);
       color c = cat.pixels[index];
       float r = red(c);
       float g = green(c);
@@ -44,7 +40,7 @@ void setup()
       b += errB * 7 / 16f;
       cat.pixels[index] = color(r,g,b);
       
-      index  = index(x - 1,y + 1);
+      index  = index(x - 1,y + 1,cat.width);
       c = cat.pixels[index];
       r = red(c);
       g = green(c);
@@ -54,7 +50,7 @@ void setup()
       b += errB * 3 / 16f;
       cat.pixels[index] = color(r,g,b);
       
-      index  = index(x    ,y + 1);
+      index  = index(x    ,y + 1,cat.width);
       c = cat.pixels[index];
       r = red(c);
       g = green(c);
@@ -64,7 +60,7 @@ void setup()
       b += errB * 5 / 16f;
       cat.pixels[index] = color(r,g,b);
 
-      index  = index(x + 1,y + 1);
+      index  = index(x + 1,y + 1,cat.width);
       c = cat.pixels[index];
       r = red(c);
       g = green(c);
@@ -77,7 +73,7 @@ void setup()
   }
   cat.updatePixels();
   
-  image(cat,cat.width * 2, 0, 1000, 696);
+  image(cat,catin.width * 2, 0, 1000, 696);
   cat.save("dithered_cat.jpg");
 }
 
