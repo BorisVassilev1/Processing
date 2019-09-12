@@ -25,7 +25,7 @@ void setup()
   sizey = height/20;
 
   field = new float[sizex][sizey];
-  for (int i = 0; i < 10000; i ++)
+  for (int i = 0; i < 50000; i ++)
   {
     particles.add(new Particle());
   }
@@ -54,7 +54,7 @@ void draw()
       float fy = sin(field[x][y] * TWO_PI * 2);
       p.addForce(new PVector(fx, fy));
       p.update();
-      p.draw();
+      //p.draw();
       canvas.strokeWeight(1);
       canvas.stroke((frameCount/2) % 255,255,255,10);
       canvas.line(p.prevPos.x, p.prevPos.y, p.pos.x, p.pos.y);

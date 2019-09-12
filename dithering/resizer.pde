@@ -1,6 +1,6 @@
 
 
-final int modif = 8;
+final int modif = 1;
 
 int index(int x, int y, int max_x)
 {

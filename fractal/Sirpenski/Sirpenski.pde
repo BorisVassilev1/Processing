@@ -5,7 +5,7 @@ PVector c = new PVector(950,900);
 int p = 1;
 int q = 1;
 
-int resolutionMultiplier = 10;
+int resolutionMultiplier = 15;
 
 Triangle tri;
 void setup()

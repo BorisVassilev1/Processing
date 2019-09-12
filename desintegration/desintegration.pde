@@ -8,26 +8,26 @@ PGraphics canvas;
 
 void setup()
 {
-  size(250,250);
+  size(500,500);
   canvas = createGraphics(width,height);
   img = loadImage("frog_2.jpg");
   canvas.beginDraw();
   noStroke();
   canvas.noStroke();
-  barrier = img.width;
+  barrier = img.width * 2;
   //image(img,0,0);
   
   particles = new ArrayList<Particle>();
   
   img.loadPixels();
-  for(int y = 0; y < img.height; y ++)
+  for(int y = 0; y < img.height * 2; y ++)
   {
-    for(int x = 0; x < img.width; x ++)
+    for(int x = 0; x < img.width * 2; x ++)
     {
-      if(img.pixels[y * img.width + x]!= color(255,255,255))
+      if(img.pixels[y / 2 * img.width  + x/2]!= color(255,255,255))
       {
         Particle p = new Particle(x,y);
-        p.c = img.pixels[y * img.width + x];
+        p.c = img.pixels[y / 2 * img.width + x/2];
         particles.add(p);
       }
     }
@@ -53,7 +53,7 @@ void draw()
         p.randomise();
       }
       p.update();
-      if(p.pos.x > img.width || p.pos.y < 0 || p.pos.y > img.height || p.pos.x < 0)
+      if(p.pos.x > img.width * 2 || p.pos.y < 0 || p.pos.y > img.height * 2 || p.pos.x < 0)
       {
         p.isAlive = false;
       }

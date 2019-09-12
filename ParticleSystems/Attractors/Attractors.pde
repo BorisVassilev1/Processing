@@ -15,6 +15,7 @@ PeasyCam cam;
 void setup()
 {
   size(800,600,P3D);
+  //translate(100,100,-1000);
   cam = new PeasyCam(this,100);
   ps = new ParticleSystem(1,50,100000,1500);
   colorMode(RGB);
@@ -44,6 +45,7 @@ void draw()
   translate(-a3.pos.x,-a3.pos.y,-a3.pos.z);
   ps.draw();
   translate(-100,-200,-100);
+  //rotateZ(0.1f);
 }
 
 void mouseClicked()
