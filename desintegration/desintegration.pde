@@ -47,7 +47,7 @@ void draw()
   {
     Particle p = particles.get(i);
     if(p.isAlive)
-    {
+    {  
       if(p.pos.x > barrier && !p.isRandomised)
       {
         p.randomise();

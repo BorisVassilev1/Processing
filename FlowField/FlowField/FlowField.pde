@@ -12,6 +12,8 @@ PGraphics canvas;
 
 boolean isPlaying = false;
 
+PImage img;
+
 void setup()
 {
   size(1200, 1000,P2D);
@@ -24,10 +26,12 @@ void setup()
   sizex = width/20;
   sizey = height/20;
 
+  img = loadImage("cat.jpg");
+
   field = new float[sizex][sizey];
   for (int i = 0; i < 50000; i ++)
   {
-    particles.add(new Particle());
+    particles.add(new Particle(img));
   }
 }
 
@@ -38,7 +42,7 @@ void draw()
   {
     for (int y = 0; y < sizey; y ++)
     {
-      field[x][y] = noise(x * 0.1, y * 0.1, z);
+      field[x][y] = noise(x * 0.05, y * 0.05, z) + .5 * noise(x * 0.1, y * 0.1, z);
     }
   }
   canvas.beginDraw();
@@ -55,8 +59,9 @@ void draw()
       p.addForce(new PVector(fx, fy));
       p.update();
       //p.draw();
-      canvas.strokeWeight(1);
-      canvas.stroke((frameCount/2) % 255,255,255,10);
+      canvas.strokeWeight(7);
+      //canvas.stroke((frameCount/2) % 255,255,255,10);
+      canvas.stroke(p.col);
       canvas.line(p.prevPos.x, p.prevPos.y, p.pos.x, p.pos.y);
     }
   }
@@ -73,6 +78,6 @@ void keyPressed()
   }
   if(key == 'r')
   {
-    canvas.save("image3.png");
+    canvas.save("image4.png");
   }
 }
